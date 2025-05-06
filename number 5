@@ -1,0 +1,12 @@
+// некоторые команды можно писать в одну строку, что  уменьшает количество слоёв, что и является оптимизацией для докер файлов (можно также использовать &&, как это показано в первой и последней строчках),
+// поэтому DockerFile должен выглядеть так:
+
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y \
+    wget\
+    python3\
+    python3-pip
+COPY search_path.sh /tmp/search_path.sh \
+     exstract_path_value.py /tmp/exstract_path_value.py \
+     config.txt /tmp/config.txt
+RUN chmod +x /tmp/search_path.sh && /tmp/exstract_path_value.py
